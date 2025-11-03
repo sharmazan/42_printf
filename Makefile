@@ -3,7 +3,10 @@ HEADER = libftprintf.h
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES =	ft_printf.c
+SOURCES =	ft_printf.c \
+			utils.c \
+			helper.c
+
 OBJECTS = $(SOURCES:.c=.o)
 
 all: $(NAME)
