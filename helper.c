@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/03 13:26:27 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:27:02 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "libftprintf.h"
+#include <unistd.h>
 
-int		ft_printf(const char *format, ...);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putudec_fd(unsigned int n, int fd);
-void	ft_puthex_fd(unsigned int n, int fd);
-void	ft_putbighex_fd(unsigned int n, int fd);
-void	ft_putptr_fd(unsigned int n, int fd);
-void	ft_putnum_base(long n, char *base, int fd);
+void	ft_puthex_fd(unsigned int n, int fd)
+{
+	ft_putnum_base(n, "0123456789abcdef", fd);
+}
 
-#endif
+void	ft_putbighex_fd(unsigned int n, int fd)
+{
+	ft_putnum_base(n, "0123456789ABCDEF", fd);
+}
+
+void	ft_putptr_fd(unsigned int n, int fd)
+{
+	write(fd, "0x", 2);
+	ft_putnum_base(n, "0123456789abcdef", fd);
+}

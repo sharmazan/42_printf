@@ -6,36 +6,32 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/10/28 20:18:48 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:01:45 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libftprintf.h"
 #include <stdarg.h>
-#include <stdio.h>
 #include <unistd.h>
 
-static char	*get_value(char c)
+static void	ft_print_formated(va_list args, char c)
 {
-	// cspdiuxX%
 	if (c == 'c')
-		return ("CHAR");
-	if (c == 's')
-		return ("STRING");
-	if (c == 'p')
-		return ("PNTR");
-	if (c == 'd')
-		return ("DECI");
-	if (c == 'i')
-		return ("INTEGER");
-	if (c == 'u')
-		return ("UUUU");
-	if (c == 'x')
-		return ("xxxx");
-	if (c == 'X')
-		return ("XXXX");
-	if (c == '%')
-		return ("%%%%");
-	return ("NULL");
+		write(1, va_arg(args, char *), 1);
+	else if (c == 's')
+		ft_putstr_fd(va_arg(args, char *), 1);
+	else if (c == 'i' || c == 'd')
+		ft_putnbr_fd(va_arg(args, int), 1);
+	else if (c == 'u')
+		ft_putudec_fd(va_arg(args, unsigned int), 1);
+	else if (c == 'p')
+		ft_putptr_fd(va_arg(args, unsigned int), 1);
+	else if (c == 'x')
+		ft_puthex_fd(va_arg(args, unsigned int), 1);
+	else if (c == 'X')
+		ft_putbighex_fd(va_arg(args, unsigned int), 1);
+	else if (c == '%')
+		write(1, "%", 1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -46,19 +42,44 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-			write(1, get_value(*(++format)), 4);
+		{
+			format++;
+			ft_print_formated(args, *format);
+			format++;
+		}
 		else
 			write(1, format++, 1);
 	}
-	// write(1, va_arg(args, char *), 1);
-	// write(1, va_arg(args, char *), 1);
-	// write(1, va_arg(args, char *), 1);
-	// printf("%s\n", va_arg(args, char *));
-	// printf("%s\n", va_arg(args, char *));
-	// printf("%s\n", va_arg(args, char *));
-	// printf("%s\n", va_arg(args, char *));
-	// printf("%s %d %s\n", va_arg(args, char *), 1);
-	write(1, "\n", 1);
 	va_end(args);
 	return (1);
 }
+
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char	*str;
+
+	str = "Hello";
+	ft_printf("%s %c %s %d %i %u %u %x %X %x %% %p world!!!!\n", str, "A",
+		"BBB", -12, 12, -1, 1, 15, 255, -15, str);
+	// printf("%c\n", 'B');
+	// printf("%s\n", "BBB");
+	ft_printf("String: %s. Pointer address: %p\n", str, str);
+	printf("String: %s. Pointer address: %p\n", str, str);
+	// printf("%p\n", 10);
+	// printf("%x\n", 10);
+	// printf("%u\n", -1);
+	// printf("%u\n", 1);
+	// printf("%d\n", -15);
+	// printf("%i\n", -15);
+	// printf("%x\n", -15);
+	// printf("%X\n", -15);
+	// printf("%d\n", 15);
+	// printf("%i\n", 15);
+	// printf("%x\n", 15);
+	// printf("%X\n", 15);
+	return (0);
+}
+*/
