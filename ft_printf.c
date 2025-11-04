@@ -6,12 +6,14 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 19:12:02 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 19:23:55 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "helper.h"
+#include "utils.h"
 #include <stdarg.h>
+#include <unistd.h>
 
 static int	ft_print_formated(va_list args, char c)
 {
@@ -177,8 +179,8 @@ void	test_bighex(void)
 	i = printf("%X\n", n);
 	j = ft_printf("%X\n", n);
 	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
-	i = printf("%X\n", 2147483647);
-	j = ft_printf("%X\n", 2147483647);
+	i = printf("%X\n", (unsigned int)2147483647);
+	j = ft_printf("%X\n", (unsigned int)2147483647);
 	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
 }
 
@@ -213,8 +215,8 @@ void	test_ptr(void)
 	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
 }
 
-#include "helper.c"
-#include "utils.c"
+// #include "helper.c"
+// #include "utils.c"
 
 int	main(void)
 {

@@ -6,11 +6,12 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 19:11:51 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 19:22:22 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "utils.h"
+#include <unistd.h>
 
 int	ft_putdec_fd(unsigned int n, int fd)
 {
