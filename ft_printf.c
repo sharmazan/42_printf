@@ -6,13 +6,12 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 16:37:25 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:25:50 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdarg.h>
-#include <unistd.h>
 
 static int	ft_print_formated(va_list args, char c)
 {

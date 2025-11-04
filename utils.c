@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 15:33:27 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:24:56 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	ft_putnum_base(long n, char *base, int fd)
 	char	buf[255];
 	int		printed;
 
+	if (n == 0)
+		return (write(fd, "0", 1));
 	printed = 0;
 	i = 0;
 	ibase = ft_strlen(base);
