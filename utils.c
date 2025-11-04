@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 11:44:29 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:19:36 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_putstr_fd(char *s, int fd)
 {
 	int	printed;
 
+	if (!s)
+		s = "(null)";
 	printed = 0;
 	while (*s)
 		printed += write(fd, s++, 1);

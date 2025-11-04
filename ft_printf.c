@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 11:45:54 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:32:03 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_print_formated(va_list args, char c)
 	else if (c == 'u')
 		return (ft_putudec_fd(va_arg(args, unsigned int), 1));
 	else if (c == 'p')
-		return (ft_putptr_fd(va_arg(args, unsigned int), 1));
+		return (ft_putptr_fd(va_arg(args, size_t), 1));
 	else if (c == 'x')
 		return (ft_puthex_fd(va_arg(args, unsigned int), 1));
 	else if (c == 'X')
@@ -57,7 +57,7 @@ int	ft_printf(const char *format, ...)
 			printed += write(1, format++, 1);
 	}
 	va_end(args);
-	return (1);
+	return (printed);
 }
 
 #include <stdio.h>
@@ -110,6 +110,37 @@ void	test_int(void)
 	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
 }
 
+void	test_str(void)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	str = NULL;
+	i = printf("%s\n", str);
+	j = ft_printf("%s\n", str);
+	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
+	str = "Hello";
+	i = printf("%s\n", str);
+	j = ft_printf("%s\n", str);
+	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
+}
+
+void	test_ptr(void)
+{
+	void	*str;
+	int		i;
+	int		j;
+
+	str = "Hello";
+	i = printf("%p\n", NULL);
+	j = ft_printf("%p\n", NULL);
+	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
+	i = printf("%p\n", str);
+	j = ft_printf("%p\n", str);
+	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);
+}
+
 #include "helper.c"
 #include "utils.c"
 
@@ -119,8 +150,22 @@ int	main(void)
 
 	// int		i;
 	str = NULL;
+	ft_printf("***************************************\n");
+	ft_printf("Testing int\n");
+	ft_printf("***************************************\n");
 	test_int();
+	ft_printf("***************************************\n");
+	ft_printf("Testing dec\n");
+	ft_printf("***************************************\n");
 	test_dec();
+	ft_printf("***************************************\n");
+	ft_printf("Testing str\n");
+	ft_printf("***************************************\n");
+	test_str();
+	ft_printf("***************************************\n");
+	ft_printf("Testing ptr\n");
+	ft_printf("***************************************\n");
+	test_ptr();
 	// ft_printf("%s %c %s %d %i %u %u %x %X %x %% %p world!!!!\n", str, "A",
 	// 	"BBB", -12, 12, -1, 1, 15, 255, -15, str);
 	// printf("%c\n", 'B');
