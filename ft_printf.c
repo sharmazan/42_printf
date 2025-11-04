@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 17:25:50 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 19:12:02 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 static int	ft_print_formated(va_list args, char c)
 {
-	int	printed;
-
-	printed = 0;
 	if (c == 'c')
 	{
 		c = (char)va_arg(args, int);
@@ -26,18 +23,18 @@ static int	ft_print_formated(va_list args, char c)
 	else if (c == 's')
 		return (ft_putstr_fd(va_arg(args, char *), 1));
 	else if (c == 'i' || c == 'd')
-		ft_putnbr_fd(va_arg(args, int), 1, &printed);
+		return (ft_putnbr_fd(va_arg(args, int), 1));
 	else if (c == 'u')
-		return (ft_putudec_fd(va_arg(args, unsigned int), 1));
+		return (ft_putdec_fd(va_arg(args, unsigned int), 1));
 	else if (c == 'p')
-		return (ft_putptr_fd(va_arg(args, size_t), 1));
+		return (ft_putptr_fd(va_arg(args, void *), 1));
 	else if (c == 'x')
 		return (ft_puthex_fd(va_arg(args, unsigned int), 1));
 	else if (c == 'X')
 		return (ft_putbighex_fd(va_arg(args, unsigned int), 1));
 	else if (c == '%')
 		return (write(1, "%", 1));
-	return (printed);
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -163,11 +160,11 @@ void	test_hex(void)
 
 void	test_bighex(void)
 {
-	int	n;
-	int	i;
-	int	j;
+	unsigned int	n;
+	int				i;
+	int				j;
 
-	n = -2147483648;
+	n = -1;
 	i = printf("%X\n", 0);
 	j = ft_printf("%X\n", 0);
 	ft_printf("Original: [%i], ft_print: [%i]\n", i, j);

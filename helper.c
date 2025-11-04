@@ -6,18 +6,37 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 17:22:01 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 19:11:51 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_puthex_fd(unsigned int n, int fd)
+int	ft_putdec_fd(unsigned int n, int fd)
+{
+	return (ft_putnum_base(n, "0123456789", fd));
+}
+
+int	ft_putnbr_fd(int n, int fd)
+{
+	int		printed;
+	long	num;
+
+	if (n >= 0)
+		return (ft_putnum_base(n, "0123456789", fd));
+	num = n;
+	num = -num;
+	printed = write(fd, "-", 1);
+	printed += ft_putnum_base(num, "0123456789", fd);
+	return (printed);
+}
+
+int	ft_puthex_fd(size_t n, int fd)
 {
 	return (ft_putnum_base(n, "0123456789abcdef", fd));
 }
 
-int	ft_putbighex_fd(unsigned int n, int fd)
+int	ft_putbighex_fd(size_t n, int fd)
 {
 	return (ft_putnum_base(n, "0123456789ABCDEF", fd));
 }
