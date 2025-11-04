@@ -6,7 +6,7 @@
 /*   By: ssharmaz <ssharmaz@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 23:17:00 by ssharmaz          #+#    #+#             */
-/*   Updated: 2025/11/04 12:19:36 by ssharmaz         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:33:27 by ssharmaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_putnum_base(long n, char *base, int fd)
 		buf[i++] = *(base + digit);
 		n /= ibase;
 	}
-	while (i >= 0)
+	while (i > 0)
 		printed += write(fd, &buf[--i], 1);
 	return (printed);
 }
